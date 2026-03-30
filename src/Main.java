@@ -1,18 +1,16 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Bogie {
     private String name;
     private int capacity;
 
-    // Constructor
     public Bogie(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
     }
 
-    // Getters
     public String getName() {
         return name;
     }
@@ -21,31 +19,39 @@ class Bogie {
         return capacity;
     }
 
-    // For display
     @Override
     public String toString() {
         return name + " (" + capacity + " seats)";
     }
 }
 
-    public static void main(String[] args) {
+public class TrainConsistManagementApp {
 
+    public static void main(String[] args) {
         System.out.println("=== Train Consist Management App ===");
 
-        // Create a list of passenger bogies
+        // Original list of passenger bogies
         List<Bogie> passengerBogies = new ArrayList<>();
         passengerBogies.add(new Bogie("Sleeper", 72));
         passengerBogies.add(new Bogie("AC Chair", 54));
         passengerBogies.add(new Bogie("First Class", 36));
+        passengerBogies.add(new Bogie("Executive", 80));
 
-        // Display unsorted bogies
-        System.out.println("\nPassenger Bogies (Unsorted):");
+        // Display original list
+        System.out.println("\nOriginal Passenger Bogies:");
         passengerBogies.forEach(System.out::println);
 
-        // Sort bogies by capacity in descending order
-        passengerBogies.sort(Comparator.comparingInt(Bogie::getCapacity).reversed());
+        // Filter bogies with capacity > 60 using Stream API
+        List<Bogie> highCapacityBogies = passengerBogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
 
-        // Display sorted bogies
-        System.out.println("\nPassenger Bogies (Sorted by Capacity - High to Low):");
+        // Display filtered bogies
+        System.out.println("\nPassenger Bogies with Capacity > 60:");
+        highCapacityBogies.forEach(System.out::println);
+
+        // Verify original list remains unchanged
+        System.out.println("\nOriginal List Remains Unchanged:");
         passengerBogies.forEach(System.out::println);
     }
+}
