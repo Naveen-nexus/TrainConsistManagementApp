@@ -1,25 +1,51 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-public class TrainConsistManagementApp {
+class Bogie {
+    private String name;
+    private int capacity;
+
+    // Constructor
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    // For display
+    @Override
+    public String toString() {
+        return name + " (" + capacity + " seats)";
+    }
+}
 
     public static void main(String[] args) {
 
-        // Welcome message
         System.out.println("=== Train Consist Management App ===");
 
-        // Create a HashMap to store bogie-capacity mapping
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+        // Create a list of passenger bogies
+        List<Bogie> passengerBogies = new ArrayList<>();
+        passengerBogies.add(new Bogie("Sleeper", 72));
+        passengerBogies.add(new Bogie("AC Chair", 54));
+        passengerBogies.add(new Bogie("First Class", 36));
 
-        // Insert capacities for passenger bogies
-        bogieCapacityMap.put("Sleeper", 72);      // 72 seats
-        bogieCapacityMap.put("AC Chair", 54);     // 54 seats
-        bogieCapacityMap.put("First Class", 36);  // 36 seats
+        // Display unsorted bogies
+        System.out.println("\nPassenger Bogies (Unsorted):");
+        passengerBogies.forEach(System.out::println);
 
-        // Display bogie and capacity details
-        System.out.println("\nBogie Capacities:");
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() + " | Capacity: " + entry.getValue());
-        }
+        // Sort bogies by capacity in descending order
+        passengerBogies.sort(Comparator.comparingInt(Bogie::getCapacity).reversed());
+
+        // Display sorted bogies
+        System.out.println("\nPassenger Bogies (Sorted by Capacity - High to Low):");
+        passengerBogies.forEach(System.out::println);
     }
-}
