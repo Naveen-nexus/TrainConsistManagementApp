@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 class Bogie {
     private String name;
@@ -39,23 +37,16 @@ public class TrainConsistManagementApp {
         passengerBogies.add(new Bogie("Sleeper", 70));
         passengerBogies.add(new Bogie("AC Chair", 55));
 
-        // Display original list
-        System.out.println("\nOriginal Passenger Bogies:");
+        // Display bogies
+        System.out.println("\nPassenger Bogies:");
         passengerBogies.forEach(System.out::println);
 
-        // Group bogies by type/name using Collectors.groupingBy
-        Map<String, List<Bogie>> groupedBogies = passengerBogies.stream()
-                .collect(Collectors.groupingBy(Bogie::getName));
+        // Calculate total seating capacity using stream + map + reduce
+        int totalSeats = passengerBogies.stream()
+                .map(Bogie::getCapacity)       // extract capacity of each bogie
+                .reduce(0, Integer::sum);      // sum all capacities
 
-        // Display grouped bogies
-        System.out.println("\nGrouped Bogies by Type:");
-        groupedBogies.forEach((type, bogies) -> {
-            System.out.println(type + ":");
-            bogies.forEach(b -> System.out.println("  " + b));
-        });
-
-        // Verify original list remains unchanged
-        System.out.println("\nOriginal List Remains Unchanged:");
-        passengerBogies.forEach(System.out::println);
+        // Display total seating capacity
+        System.out.println("\nTotal Seating Capacity in Train: " + totalSeats + " seats");
     }
 }
