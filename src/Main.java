@@ -1,38 +1,38 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
+        // Welcome message
         System.out.println("=== Train Consist Management App ===");
 
-        List<String> passengerBogies = new ArrayList<>();
+        // Create LinkedList for train consist
+        LinkedList<String> trainConsist = new LinkedList<>();
 
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        // Add bogies
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        System.out.println("\nPassenger bogies after addition:");
-        for (String bogie : passengerBogies) {
-            System.out.println(bogie);
-        }
+        // Display initial consist
+        System.out.println("\nInitial Train Consist:");
+        System.out.println(trainConsist);
 
-        passengerBogies.remove("AC Chair");
+        // Insert Pantry Car at position 2 (index 2)
+        trainConsist.add(2, "Pantry Car");
 
-        System.out.println("\nPassenger bogies after removal:");
-        for (String bogie : passengerBogies) {
-            System.out.println(bogie);
-        }
+        // Display after insertion
+        System.out.println("\nAfter adding Pantry Car at position 2:");
+        System.out.println(trainConsist);
 
-        if (passengerBogies.contains("Sleeper")) {
-            System.out.println("\nSleeper bogie exists in the train.");
-        } else {
-            System.out.println("\nSleeper bogie does not exist.");
-        }
+        // Remove first and last bogie
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
 
-        System.out.println("\nFinal passenger bogie list:");
-        for (String bogie : passengerBogies) {
+        // Final consist
+        System.out.println("\nFinal Train Consist:");
+        for (String bogie : trainConsist) {
             System.out.println(bogie);
         }
     }
